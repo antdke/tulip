@@ -12,8 +12,11 @@ class PostsController < ApplicationController
     #render plain: params[:post].inspect
     @post = Post.new(post_params) # directs user to their newly made post
 
-    @post.save
-    redirect_to @post
+    if (@post.save)
+      redirect_to @post
+    else
+      render 'new'
+    end
   end
 
   private def post_params
