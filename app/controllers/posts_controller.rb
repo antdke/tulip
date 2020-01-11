@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   end
   def new
     @addpostheader = 'Create a new post!'
+    @post = Post.new 
   end
   def create
     #render plain: params[:post].inspect
