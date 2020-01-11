@@ -3,10 +3,9 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
   def show
-    @post = Post.find(params[:id]) # shows post by name its assigned
+    @post = Post.find(params[:id]) # finds post by id
   end
   def new
-    @addpostheader = 'Create a new post!'
     @post = Post.new 
   end
   def create
@@ -20,6 +19,26 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+    @post = Post.find(params[:id]) # finds post by id
+    
+  end
+  def update
+    @post = Post.find(params[:id]) # finds post by id
+
+    if (@post.update(post_params))
+      redirect_to @post
+    else
+      render 'edit'
+    end
+
+  end
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+
+    redirect_to posts_path
+  end
   private def post_params
     params.require(:post).permit(:title, :body) # limits data needed for a post to title and body
   end
